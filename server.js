@@ -1,9 +1,9 @@
 const express = require('express')
-var app = express()
+const app = express()
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
-const jwt = require('jsonwebtoken')
 const config = require('./config/config.json')
+const route = require('./routes/route')
 
 const port = process.env.port || config.port
 
@@ -18,4 +18,6 @@ mongoose.connect(config.mongo_uri , {useNewUrlParser : true} , err => {
     }
 })
 
+app.use('/api',route)
 
+app.listen(port , () => console.log(`Listening at ${port}`));

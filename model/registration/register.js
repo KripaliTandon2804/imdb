@@ -32,11 +32,11 @@ const register = new Schema({
         required: true,
         unique: true
     },
-    emailVerify: {
-        otp: Number,
-        verified: Boolean,
-        verifiedAt: Date
-    },
+    // emailVerify: {
+    //     otp: Number,
+    //     verified: Boolean,
+    //     verifiedAt: Date
+    // },
     token: String,
     status: Number,
     createdAt: {

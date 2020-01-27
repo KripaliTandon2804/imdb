@@ -1,8 +1,7 @@
-const dbUserLogin = require('../../model/user/userlogin')
 const dbUserRegistration = require('../../model/registration/register')
 const jwt = require ('jsonwebtoken')
 const bcrypt = require('bcrypt')
-const saltRound = 8
+
 
 module.exports = (req,res) => {
  if(!req.body.email || !req.body.password){
@@ -23,40 +22,39 @@ module.exports = (req,res) => {
                  msg : "Please register first."
              })
          }else{
-                
-
-            //  bcrypt.compare(req.body.password , loginData.password).then((matched) => {
-            //      if(matched){
-            //          var tokenData = {
-            //              email : loginData.email,
-            //              phone : loginData.phone
-            //          }
-            //         var token = jwt.sign(tokenData , req.app.get('secretKey'));
-            //         dbUserLogin.findOneAndUpdate({email : req.body.email} , {$push : {lastLogin : new Date()} , $set : {token : token}}).then(loginData => {
-            //             res.json({
-            //                 success:true,
-            //                 msg: "Login Successful.",
-            //                 token:token
-            //             })
-            //         }).catch(err => {
-            //             res.json({
-            //                 success:false,
-            //                 msg:"Error in login.Try again"
-            //             })
-            //         })
-            //      }else{
-            //          res.json({
-            //              success:false,
-            //              msg: "Incorrect Password."
-            //          })
-            //      }
-            //  }).catch(err => {
-            //      res.json({
-            //          success:false,
-            //          msg:"Error in matching password.",
+             bcrypt.compare(req.body.password , registerData.password).then((matched) => {
+                 if(matched){
+                     var tokenData = {
+                         email : registerData.email,
+                         phone : registerData.phone,
+                         name : registeredData.name,
+                     }
+                    var token = jwt.sign(tokenData , req.app.get('secretKey'));
+                    dbUserRegistration.findOneAndUpdate({email : req.body.email} , {$set : {token : token}}).then(loginData => {
+                        res.json({
+                            success:true,
+                            msg: "Login Successful.",
+                            token:token
+                        })
+                    }).catch(err => {
+                        res.json({
+                            success:false,
+                            msg:"Error in login.Try again"
+                        })
+                    })
+                 }else{
+                     res.json({
+                         success:false,
+                         msg: "Incorrect Password."
+                     })
+                 }
+             }).catch(err => {
+                 res.json({
+                     success:false,
+                     msg:"Error in matching password.",
                      
-            //      })
-            //  })
+                 })
+             })
          }
      })
  }

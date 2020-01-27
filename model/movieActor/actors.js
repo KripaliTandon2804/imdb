@@ -14,6 +14,7 @@ const actors = new Schema({
     picture: {
         type: String
     },
+    actorId : String,
     movies: [{
         type: Schema.Types.ObjectId,
         ref: 'movies'
