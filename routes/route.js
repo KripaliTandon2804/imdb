@@ -4,7 +4,7 @@ const multer = require('multer')
 
 var storage = multer.diskStorage({
     destination:function(req,file,cb){
-        cb(null , __dirname + '/user/moviePhotos')
+        cb(null , __dirname + '/user/movieActorPhotos')
     },
     filename: function (req,file, cb){
         cb(null , 'MOV' + Date.now() + '' + file.originalname)
@@ -23,6 +23,12 @@ router.post('/login',userLogin)
 
 const addActor = require('../routes/user/addActor')
 router.post('/addActor' , profilepic , addActor)
+
+const addMovie = require('../routes/user/addMovie')
+router.post('/addMovie' , movieUpload , addMovie)
+
+const getMovie = require('../routes/user/getAllMov')
+router.get('/getMovie' , getMovie)
 
 module.exports = router;
 

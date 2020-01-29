@@ -3,10 +3,9 @@ const Schema = mongoose.Schema
 
 
 const movies = new Schema({
-    name: {
+    movieName: {
         type: String,
         required: true,
-        unique: true
     },
     photos: {
         type: String
@@ -19,13 +18,7 @@ const movies = new Schema({
         type: String,
         required: true
     },
-    cast: [{
-        actorId: {
-            type: Schema.Types.ObjectId,
-            ref: 'actors'
-        },
-        name: String
-    }],
+    cast : [String],
     releaseDate: {
         type: Date
     },

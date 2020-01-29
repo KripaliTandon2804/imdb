@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({extended:true}))
 
 app.set('secretKey' , config.secret)
 
-mongoose.connect(config.mongo_uri , {useNewUrlParser : true} , err => {
+mongoose.connect(config.mongo_uri , {useNewUrlParser : true , useUnifiedTopology: true} , err => {
     if(!err){
         console.log("Database connected")
     }

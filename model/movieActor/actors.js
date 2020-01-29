@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 
 
 const actors = new Schema({
-    name: {
+    actorName: {
         type: String,
         required: true
     },
@@ -15,10 +15,11 @@ const actors = new Schema({
         type: String
     },
     actorId : String,
-    movies: [{
-        type: Schema.Types.ObjectId,
-        ref: 'movies'
-    }],
+    // movies: [{
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'movies'
+    // }],
+    movies : [String]
 })
 
 module.exports = mongoose.model('actors', actors)
